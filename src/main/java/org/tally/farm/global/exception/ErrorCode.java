@@ -8,6 +8,9 @@ import org.springframework.http.HttpStatus;
 @AllArgsConstructor
 public enum ErrorCode {
 
+    BAD_REQUEST(1001, HttpStatus.BAD_REQUEST),
+    NOT_FOUND(1002, HttpStatus.BAD_REQUEST)
+
     ;
 
 
