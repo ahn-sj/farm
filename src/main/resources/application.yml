@@ -1,3 +1,11 @@
 spring:
   profiles:
     active: local
+
+springdoc: # https://velog.io/@najiexx/Spring-Boot-3에-Swagger-적용하기springdoc-openapi
+  show-login-endpoint: true
+  swagger-ui:
+    path: /swagger-ui/index.html
+  api-docs:
+    path: /api-docs
+
