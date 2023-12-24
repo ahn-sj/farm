@@ -11,7 +11,7 @@ import org.tally.farm.point.domain.repository.PointDetailJpaRepository;
 import org.tally.farm.point.domain.repository.PointEventJpaRepository;
 import org.tally.farm.utils.DateUtils;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 import static org.tally.farm.point.dto.PointRequest.PointCreate;
 
@@ -27,23 +27,27 @@ public class PointWriter {
     public void earnPoint(final PointCreate request, final PointChargeType type) {
         final int currnetPoint = pointReader.getCurrnetPoint(request.userId());
 
-        final LocalDateTime expireDt = DateUtils.getPointExpireDt();
+        final PointEvent pointEvent = getPointEvent(type, currnetPoint);
+        final PointEvent savedPointEvent = pointEventJpaRepository.save(pointEvent);
+        pointDetailJpaRepository.save(getPointDetail(type, savedPointEvent));
+    }
 
-        final PointEvent pointEvent = PointEvent.builder()
+    private static PointDetail getPointDetail(final PointChargeType type, final PointEvent savedEvent) {
+        return PointDetail.builder()
+                .pointEventId(savedEvent.getId())
+                .amount(type.getAmount())
+                .status(PointStatus.CHARGE)
+                .expireDt(DateUtils.getPointExpireDt(LocalDate.now()))
+                .build();
+    }
+
+    private static PointEvent getPointEvent(final PointChargeType type, final int currnetPoint) {
+        return PointEvent.builder()
                 .userId(type.getId())
                 .status(PointStatus.CHARGE)
                 .amount(type.getAmount())
                 .balance(type.getBalanceAfterSumChargeAmount(currnetPoint))
-                .expireDt(expireDt)
+                .expireDt(DateUtils.getPointExpireDt(LocalDate.now()))
                 .build();
-        final PointEvent savedEvent = pointEventJpaRepository.save(pointEvent);
-
-        final PointDetail pointDetail = PointDetail.builder()
-                .pointEventId(savedEvent.getId())
-                .amount(type.getAmount())
-                .status(PointStatus.CHARGE)
-                .expireDt(expireDt)
-                .build();
-        pointDetailJpaRepository.save(pointDetail);
     }
 }

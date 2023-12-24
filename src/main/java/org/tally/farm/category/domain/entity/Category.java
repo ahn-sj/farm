@@ -17,6 +17,9 @@ public class Category extends BaseEntity {
     @Column(name = "category_id")
     private Long id;
 
+    // ex) CG0000 -> CG = Enum / 0000 -> +10000 & substring
+    private String categoryKey;
+
     @Enumerated(EnumType.STRING)
     private CategoryType categoryType;
 

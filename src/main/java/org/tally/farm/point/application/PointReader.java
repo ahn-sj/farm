@@ -13,6 +13,8 @@ import static org.tally.farm.point.exception.PointException.PointChargeTypeNotFo
 @RequiredArgsConstructor
 public class PointReader {
 
+    private static final int ZERO_POINT = 0;
+
     private final PointChargeTypeJpaRepository pointChargeTypeJpaRepository;
     private final PointEventJpaRepository pointEventJpaRepository;
 
@@ -23,6 +25,10 @@ public class PointReader {
 
     public int getCurrnetPoint(final Long userId) {
         final Long currentPoint = pointEventJpaRepository.findCurrentPoint(userId);
+
+        if(currentPoint == null) {
+            return ZERO_POINT;
+        }
         return currentPoint.intValue();
     }
 }
