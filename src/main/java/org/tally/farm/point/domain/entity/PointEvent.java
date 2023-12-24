@@ -1,9 +1,7 @@
 package org.tally.farm.point.domain.entity;
 
 import jakarta.persistence.*;
-import lombok.AccessLevel;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.tally.farm.global.BaseEntity;
 import org.tally.farm.point.domain.PointStatus;
 
@@ -11,6 +9,8 @@ import java.time.LocalDateTime;
 
 @Getter
 @Entity
+@Builder
+@AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class PointEvent extends BaseEntity {
 
@@ -30,4 +30,5 @@ public class PointEvent extends BaseEntity {
     private int balance;
 
     private LocalDateTime expireDt;
+
 }

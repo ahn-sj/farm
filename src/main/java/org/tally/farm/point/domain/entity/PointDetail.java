@@ -1,15 +1,15 @@
 package org.tally.farm.point.domain.entity;
 
 import jakarta.persistence.*;
-import lombok.AccessLevel;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.tally.farm.point.domain.PointStatus;
 
 import java.time.LocalDateTime;
 
 @Getter
 @Entity
+@Builder
+@AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class PointDetail {
 
@@ -22,6 +22,7 @@ public class PointDetail {
 
     private int amount;
 
+    @Enumerated(EnumType.STRING)
     private PointStatus status;
 
     private LocalDateTime expireDt;
