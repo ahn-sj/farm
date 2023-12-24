@@ -8,12 +8,12 @@ import org.springframework.http.HttpStatus;
 @AllArgsConstructor
 public enum ErrorCode {
 
-    BAD_REQUEST(1001, HttpStatus.BAD_REQUEST),
-    NOT_FOUND(1002, HttpStatus.BAD_REQUEST)
+    BAD_REQUEST("1001", HttpStatus.BAD_REQUEST),
+    NOT_FOUND("1002", HttpStatus.BAD_REQUEST)
 
     ;
 
 
-    private final int code;
+    private final String errorCode;
     private final HttpStatus status;
 }
