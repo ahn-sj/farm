@@ -1,4 +1,4 @@
-package org.tally.farm.global.controller;
+package org.tally.farm.global.swagger.controller;
 
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,7 +11,7 @@ import java.util.Map;
 
 @Tag(name = "00. GLOBAL", description = "GLOBAL API")
 @RestController
-public class GlobalController {
+public class GlobalApiController {
 
     @GetMapping("/create")
     public ApplicationResponse<Void> create() {
