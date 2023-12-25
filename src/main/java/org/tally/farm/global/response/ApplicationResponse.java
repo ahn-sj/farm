@@ -6,6 +6,9 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import static org.tally.farm.global.response.ResultCode.FAIL;
+import static org.tally.farm.global.response.ResultCode.SUCCESS;
+
 @Getter
 @AllArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_NULL)
@@ -30,22 +33,17 @@ public class ApplicationResponse<T> {
 
     public static ApplicationResponseBuilder success(String message) {
         return ApplicationResponseBuilder.builder()
-                .result(ResultCode.SUCCESS)
+                .result(SUCCESS)
                 .message(message)
                 .build();
     }
 
     public static ApplicationResponseBuilder fail(String errorCode, String message) {
         return ApplicationResponseBuilder.builder()
-                .result(ResultCode.FAIL)
+                .result(FAIL)
                 .errorCode(errorCode)
                 .message(message)
                 .build();
-    }
-
-    enum ResultCode {
-        SUCCESS,
-        FAIL
     }
 
     @Builder
@@ -53,7 +51,7 @@ public class ApplicationResponse<T> {
     @AllArgsConstructor
     public static class ApplicationResponseBuilder {
 
-        private ApplicationResponse.ResultCode result;
+        private ResultCode result;
         private String errorCode;
         private String message;
 
