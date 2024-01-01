@@ -12,3 +12,8 @@ springdoc: # https://velog.io/@najiexx/Spring-Boot-3에-Swagger-적용하기spri
   api-docs:
     path: /api-docs
 
+# actuator
+management:
+  endpoints:
+    web:
+      base-path: /monitoring
