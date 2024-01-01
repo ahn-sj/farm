@@ -2,18 +2,23 @@ package org.tally.farm.global.exception;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import org.springframework.http.HttpStatus;
+
+import static org.tally.farm.global.exception.Detail.NOT_FOUND;
+import static org.tally.farm.global.exception.Detail.SERVER_ERROR;
+import static org.tally.farm.global.exception.Domain.COMMON;
+import static org.tally.farm.global.exception.Domain.POINT;
 
 @Getter
 @AllArgsConstructor
 public enum ErrorCode {
 
-    BAD_REQUEST("1001", HttpStatus.BAD_REQUEST),
-    NOT_FOUND("1002", HttpStatus.BAD_REQUEST)
+    COMMON_SERVER_ERROR("1000", COMMON, SERVER_ERROR),
+
+    POINT_TYPE_NOT_FOUND("2001", POINT, NOT_FOUND)
 
     ;
 
-
     private final String errorCode;
-    private final HttpStatus status;
+    private final Domain domain;
+    private final Detail detail;
 }

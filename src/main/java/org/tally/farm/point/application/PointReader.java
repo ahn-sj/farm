@@ -2,11 +2,11 @@ package org.tally.farm.point.application;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import org.tally.farm.global.exception.ErrorCode;
 import org.tally.farm.point.domain.entity.PointChargeType;
 import org.tally.farm.point.domain.repository.PointChargeTypeJpaRepository;
 import org.tally.farm.point.domain.repository.PointEventJpaRepository;
 
+import static org.tally.farm.global.exception.ErrorCode.POINT_TYPE_NOT_FOUND;
 import static org.tally.farm.point.exception.PointException.PointChargeTypeNotFoundException;
 
 @Service
@@ -20,7 +20,7 @@ public class PointReader {
 
     public PointChargeType getPointChargeType(final Long pointChargeTypeId) {
         return pointChargeTypeJpaRepository.findById(pointChargeTypeId).orElseThrow(
-                () -> new PointChargeTypeNotFoundException(ErrorCode.NOT_FOUND, pointChargeTypeId));
+                () -> new PointChargeTypeNotFoundException(POINT_TYPE_NOT_FOUND, pointChargeTypeId));
     }
 
     public int getCurrnetPoint(final Long userId) {

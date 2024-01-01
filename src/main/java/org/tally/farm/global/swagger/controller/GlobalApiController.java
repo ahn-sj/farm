@@ -27,7 +27,7 @@ public class GlobalApiController {
 
     @GetMapping("/fail")
     public ApplicationResponse<Void> exception() {
-        return ApplicationResponse.fail(ErrorCode.BAD_REQUEST.getErrorCode(), "잘못된 요청입니다.").build();
+        return ApplicationResponse.fail(ErrorCode.COMMON_SERVER_ERROR.getErrorCode(), "잘못된 요청입니다.").build();
     }
 
 }
