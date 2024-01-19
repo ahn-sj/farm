@@ -2,6 +2,7 @@ package org.tally.farm.point.domain.entity;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.tally.farm.point.domain.PointChargeType;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -12,10 +13,7 @@ class PointChargeTypeTest {
     void getBalanceAfterSumChargeAmount() {
 
         // given
-        final PointChargeType type = PointChargeType.builder()
-                .amount(10_000)
-                .name("1만원 충전권")
-                .build();
+        final PointChargeType type = PointChargeType.POINT_TYPE_01;
 
         // when
         final int balance = type.getBalanceAfterSumChargeAmount(5_000);

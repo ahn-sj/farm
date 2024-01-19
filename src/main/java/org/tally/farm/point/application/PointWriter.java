@@ -3,8 +3,8 @@ package org.tally.farm.point.application;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.tally.farm.point.domain.PointChargeType;
 import org.tally.farm.point.domain.PointStatus;
-import org.tally.farm.point.domain.entity.PointChargeType;
 import org.tally.farm.point.domain.entity.PointDetail;
 import org.tally.farm.point.domain.entity.PointEvent;
 import org.tally.farm.point.domain.repository.PointDetailJpaRepository;
@@ -19,15 +19,15 @@ import static org.tally.farm.point.dto.PointRequest.PointCreate;
 @RequiredArgsConstructor
 public class PointWriter {
 
-    private final PointReader pointReader;
+
     private final PointEventJpaRepository pointEventJpaRepository;
     private final PointDetailJpaRepository pointDetailJpaRepository;
 
     @Transactional
-    public void earnPoint(final PointCreate request, final PointChargeType type) {
-        final int currnetPoint = pointReader.getCurrnetPoint(request.userId());
+    public void earnPoint(final PointCreate request, final int currentPoint) {
+        final PointChargeType type = PointChargeType.find(request.chargeCode());
 
-        final PointEvent pointEvent = getPointEvent(type, currnetPoint);
+        final PointEvent pointEvent = getPointEvent(request.userId(), type, currentPoint);
         final PointEvent savedPointEvent = pointEventJpaRepository.save(pointEvent);
         pointDetailJpaRepository.save(getPointDetail(type, savedPointEvent));
     }
@@ -41,12 +41,12 @@ public class PointWriter {
                 .build();
     }
 
-    private static PointEvent getPointEvent(final PointChargeType type, final int currnetPoint) {
+    private static PointEvent getPointEvent(final Long userId, final PointChargeType type, final int currentPoint) {
         return PointEvent.builder()
-                .userId(type.getId())
+                .userId(userId)
                 .status(PointStatus.CHARGE)
                 .amount(type.getAmount())
-                .balance(type.getBalanceAfterSumChargeAmount(currnetPoint))
+                .balance(type.getBalanceAfterSumChargeAmount(currentPoint))
                 .expireDt(DateUtils.getPointExpireDt(LocalDate.now()))
                 .build();
     }

@@ -6,5 +6,6 @@ public enum Domain {
     AUTH,
 
     ORDER,
+    USER,
     POINT;
 }

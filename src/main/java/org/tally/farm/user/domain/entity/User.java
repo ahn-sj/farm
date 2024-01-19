@@ -26,5 +26,6 @@ public class User extends BaseEntity {
     private LocalDate birthday;
     private String address1;
     private String address2;
+    private String providerId;
 
 }

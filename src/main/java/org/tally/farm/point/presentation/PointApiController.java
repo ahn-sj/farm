@@ -7,8 +7,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.tally.farm.global.response.ApplicationResponse;
 import org.tally.farm.global.swagger.controller.PointController;
 import org.tally.farm.point.application.PointService;
-
-import static org.tally.farm.point.dto.PointRequest.PointCreate;
+import org.tally.farm.point.dto.PointRequest;
 
 @RestController
 @RequiredArgsConstructor
@@ -18,7 +17,7 @@ public class PointApiController implements PointController {
 
     @Override
     @PostMapping("/v1/points/point-charge")
-    public ApplicationResponse<Void> insertPoint(@RequestBody PointCreate request) {
+    public ApplicationResponse<Void> insertPoint(@RequestBody PointRequest.PointCreate request) {
         pointService.earnPoint(request);
         return ApplicationResponse.created().build();
     }

@@ -5,16 +5,19 @@ import lombok.Getter;
 
 import static org.tally.farm.global.exception.Detail.NOT_FOUND;
 import static org.tally.farm.global.exception.Detail.SERVER_ERROR;
-import static org.tally.farm.global.exception.Domain.COMMON;
-import static org.tally.farm.global.exception.Domain.POINT;
+import static org.tally.farm.global.exception.Domain.*;
 
 @Getter
 @AllArgsConstructor
 public enum ErrorCode {
 
+    // 1xxx: COMMON
     COMMON_SERVER_ERROR("1000", COMMON, SERVER_ERROR),
 
-    POINT_TYPE_NOT_FOUND("2001", POINT, NOT_FOUND)
+    // 2xxx: USER
+    USER_NOT_FOUND("2001", USER, NOT_FOUND),
+
+    POINT_CHARGE_TYPE_NOT_FOUND("3001", POINT, NOT_FOUND)
 
     ;
 
