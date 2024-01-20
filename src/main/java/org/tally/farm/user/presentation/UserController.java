@@ -15,11 +15,6 @@ public class UserController {
 
     @PostMapping("/v1/users")
     public void joinUser(@RequestBody final UserRequest.JoinUserRequest request) {
-
         userService.join(request);
-
-
-
-
     }
 }

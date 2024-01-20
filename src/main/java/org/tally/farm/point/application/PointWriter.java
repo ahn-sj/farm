@@ -19,7 +19,6 @@ import static org.tally.farm.point.dto.PointRequest.PointCreate;
 @RequiredArgsConstructor
 public class PointWriter {
 
-
     private final PointEventJpaRepository pointEventJpaRepository;
     private final PointDetailJpaRepository pointDetailJpaRepository;
 

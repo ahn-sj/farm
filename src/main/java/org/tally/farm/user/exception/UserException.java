@@ -15,4 +15,5 @@ public class UserException extends BusinessException {
             super(errorCode, String.format("존재하지 않는 사용자입니다. - request info { user_id = %s }", input));
         }
     }
+
 }

@@ -5,4 +5,6 @@ import org.tally.farm.user.domain.entity.User;
 
 public interface UserRepository extends JpaRepository<User, Long> {
 
+    boolean existsUserByEmailAndProviderId(String email, String providerId);
+
 }

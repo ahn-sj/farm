@@ -3,8 +3,7 @@ package org.tally.farm.global.exception;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
-import static org.tally.farm.global.exception.Detail.NOT_FOUND;
-import static org.tally.farm.global.exception.Detail.SERVER_ERROR;
+import static org.tally.farm.global.exception.Detail.*;
 import static org.tally.farm.global.exception.Domain.*;
 
 @Getter
@@ -16,6 +15,7 @@ public enum ErrorCode {
 
     // 2xxx: USER
     USER_NOT_FOUND("2001", USER, NOT_FOUND),
+    USER_EMAIL_EXISTED("2002", USER, EXISTED),
 
     POINT_CHARGE_TYPE_NOT_FOUND("3001", POINT, NOT_FOUND)
 
