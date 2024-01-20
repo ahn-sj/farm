@@ -24,7 +24,7 @@ public enum PointChargeType {
         return Arrays.stream(values())
                 .filter(chargeType -> chargeType.getCode().equalsIgnoreCase(code))
                 .findFirst()
-                .orElseThrow(() -> new PointChargeTypeNotFoundException(ErrorCode.POINT_CHARGE_TYPE_NOT_FOUND, code));
+                .orElseThrow(() -> new PointChargeTypeNotFoundException(ErrorCode.POINT_NOT_FOUND, code));
     }
 
     public int getBalanceAfterSumChargeAmount(final int currentPoint) {
