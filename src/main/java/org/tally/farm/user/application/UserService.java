@@ -2,6 +2,7 @@ package org.tally.farm.user.application;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.tally.farm.global.exception.BusinessException;
 import org.tally.farm.global.exception.ErrorCode;
 import org.tally.farm.user.application.validator.UserValidator;
@@ -21,6 +22,7 @@ public class UserService {
 
     private final UserMapper userMapper;
 
+    @Transactional
     public void join(final UserRequest.JoinUserRequest request) {
         final ProviderId providerId = ProviderId.find(request.providerId());
 
@@ -32,5 +34,10 @@ public class UserService {
         final User user = new User(userCommand);
 
         userWriter.save(user);
+    }
+
+    public void getDetailedUser(final Long userId) {
+
+
     }
 }

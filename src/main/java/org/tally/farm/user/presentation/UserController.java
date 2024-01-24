@@ -1,9 +1,7 @@
 package org.tally.farm.user.presentation;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.tally.farm.global.response.ApplicationResponse;
 import org.tally.farm.user.application.UserService;
 import org.tally.farm.user.dto.UserRequest;
@@ -17,6 +15,12 @@ public class UserController {
     @PostMapping("/v1/users")
     public ApplicationResponse<Void> joinUser(@RequestBody final UserRequest.JoinUserRequest request) {
         userService.join(request);
+        return ApplicationResponse.created().build();
+    }
+
+    @GetMapping("/v1/users/{userId}")
+    public ApplicationResponse<Void> getDetailedUser(@PathVariable final Long userId) {
+        userService.getDetailedUser(userId);
         return ApplicationResponse.created().build();
     }
 }
